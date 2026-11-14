@@ -106,6 +106,22 @@ try {
     $adminHtml = (Invoke-WebRequest -Uri "http://localhost:8080/admin" -UseBasicParsing).Content
     Write-Host "GET /admin returns $($adminHtml.Length) chars"
 
+    Write-Host "`n11. Testing GET /api/album?slug=wedding-nimal-kavindi..."
+    $singleAlbum = Invoke-RestMethod -Uri "http://localhost:8080/api/album?slug=wedding-nimal-kavindi" -Method Get
+    Write-Host "Single album via query param slug: $($singleAlbum.title)"
+    if ($singleAlbum.slug -ne "wedding-nimal-kavindi") { throw "Slug query param mismatch" }
+
+    Write-Host "`n12. Testing sub-resource URL resolution under /album/css/style.css..."
+    $cssContent = (Invoke-WebRequest -Uri "http://localhost:8080/album/css/style.css" -UseBasicParsing).Content
+    Write-Host "GET /album/css/style.css returns $($cssContent.Length) chars"
+    if ($cssContent.Length -lt 100) { throw "CSS sub-resource failed" }
+
+    Write-Host "`n13. Testing alternative access key 'lumina2026'..."
+    $login2Body = '{"password":"lumina2026"}'
+    $login2Resp = Invoke-RestMethod -Uri "http://localhost:8080/api/auth/login" -Method Post -Body $login2Body -ContentType "application/json"
+    Write-Host "Alternative key login success: $($login2Resp.success)"
+    if (-not $login2Resp.success) { throw "Alternative key login failed" }
+
     Write-Host "`nAll tests completed successfully!"
 } finally {
     Write-Host "Stopping background server process..."

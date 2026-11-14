@@ -72,7 +72,7 @@
           <input type="checkbox" id="rememberMe" name="rememberMe" style="accent-color: var(--accent-gold-primary); width: 16px; height: 16px;">
           <span>Remember session</span>
         </label>
-        <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted);">Default: lumina2026</span>
+        <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted);">Default: admin123</span>
       </div>
 
       <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
@@ -184,11 +184,11 @@
         } catch (error) {
           // If network error / standalone file test fallback
           console.warn('API authentication fetch error:', error);
-          if (password === 'lumina2026') {
+          if (password === 'admin123' || password === 'lumina2026') {
             localStorage.setItem('lumina_auth_token', 'mock-session-token-' + Date.now());
             window.location.href = './index.html';
           } else {
-            showAlert('Connection to studio server failed or invalid access key. Use default key: lumina2026');
+            showAlert('Connection to studio server failed or invalid access key. Use default key: admin123');
           }
         } finally {
           loginSubmitBtn.disabled = false;

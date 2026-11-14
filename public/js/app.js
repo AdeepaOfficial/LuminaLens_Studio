@@ -248,9 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Page-specific routing
   const path = window.location.pathname.toLowerCase();
-  if (path.includes('albums.html')) {
+  if (path.includes('albums.html') || path === '/albums' || path === '/albums/') {
     initAlbumsDirectory();
-  } else if (path.includes('album.html')) {
+  } else if (path.includes('album.html') || path.startsWith('/album/') || path === '/album' || path === '/album/') {
     initSingleAlbumView();
   } else {
     initHomepage();
@@ -360,13 +360,16 @@ async function fetchAllAlbums() {
 
 async function fetchAlbumBySlug(slug) {
   try {
-    const res = await fetch(`/api/album?slug=${encodeURIComponent(slug)}`);
+    let res = await fetch(`/api/albums/${encodeURIComponent(slug)}`);
+    if (!res.ok) {
+      res = await fetch(`/api/album?slug=${encodeURIComponent(slug)}`);
+    }
     if (res.ok) {
       const album = await res.json();
       if (album && album.slug) return album;
     }
   } catch (err) {
-    console.warn('API /api/album failed, checking fallback list:', err);
+    console.warn('API fetchAlbumBySlug failed, checking fallback list:', err);
   }
 
   const all = await fetchAllAlbums();
@@ -507,7 +510,19 @@ function createAlbumCardHtml(album) {
    ========================================================================== */
 async function initSingleAlbumView() {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug') || 'wedding-nimal-kavindi';
+  let slug = params.get('slug');
+  if (!slug) {
+    const p = window.location.pathname;
+    if (p.startsWith('/album/')) {
+      const parts = p.substring('/album/'.length).split('/');
+      if (parts[0] && parts[0].trim()) {
+        slug = decodeURIComponent(parts[0].trim());
+      }
+    }
+  }
+  if (!slug) {
+    slug = 'wedding-nimal-kavindi';
+  }
 
   const album = await fetchAlbumBySlug(slug);
   if (!album) {
