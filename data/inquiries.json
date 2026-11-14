@@ -1,0 +1,13 @@
+[
+  {
+    "id": "inq-2026-001",
+    "name": "Dilshan Fernando",
+    "email": "dilshan.f@example.com",
+    "phone": "+94 77 555 4321",
+    "preferredCategory": "Wedding",
+    "estimatedDate": "2026-11-20",
+    "message": "Inquiring about wedding packages for November 2026 in Colombo.",
+    "status": "Responded",
+    "receivedAt": "2026-03-01T11:20:00Z"
+  }
+]

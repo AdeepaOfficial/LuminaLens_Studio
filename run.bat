@@ -4,6 +4,9 @@ setlocal enabledelayedexpansion
 title LuminaLens Studio - Server Runner
 chcp 65001 > nul
 
+:: Ensure script runs from project root directory
+cd /d "%~dp0"
+
 echo ===================================================
 echo           LUMINALENS STUDIO - RUNNER
 echo ===================================================
@@ -31,23 +34,24 @@ if not exist "bin" mkdir "bin"
 
 :: 3. Find and compile all Java source files
 echo [*] Compiling Java source files...
-dir /s /b "src\*.java" > "bin\sources.txt" 2>nul
-for %%A in ("bin\sources.txt") do if %%~zA==0 del "bin\sources.txt"
+set "JAVA_SOURCES="
+for /r "src" %%F in (*.java) do (
+    set "JAVA_SOURCES=!JAVA_SOURCES! "%%F""
+)
 
-if not exist "bin\sources.txt" (
+if "!JAVA_SOURCES!"=="" (
     echo [!] No Java source files found in src\.
     echo [*] Please ensure src\server\LuminaServer.java is present.
     pause
     exit /b 1
 )
 
-javac -encoding UTF-8 -d "bin" @"bin\sources.txt"
+javac -encoding UTF-8 -d "bin" !JAVA_SOURCES!
 if %errorlevel% neq 0 (
     echo [ERROR] Compilation failed. Please check compiler errors above.
     pause
     exit /b %errorlevel%
 )
-del "bin\sources.txt"
 echo [OK] Compilation successful!
 echo.
 
