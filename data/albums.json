@@ -1,0 +1,122 @@
+{
+  "system": {
+    "name": "LuminaLens Studio",
+    "photographer": "Adeepa Marambage",
+    "tagline": "Visual Stories Captured in Timeless Light",
+    "bio": "Specializing in high-end wedding, portrait, and editorial photography. Crafting visual legacies with atmospheric light and cinematic storytelling.",
+    "stats": [
+      { "label": "Weddings Captured", "value": "150+" },
+      { "label": "Years of Mastery", "value": "12+" },
+      { "label": "Frames Curated", "value": "45,000+" },
+      { "label": "Global Destinations", "value": "18" }
+    ],
+    "contact": {
+      "email": "adeepadmarambage@gmail.com",
+      "phone": "+94 77 123 4567",
+      "location": "Colombo, Sri Lanka",
+      "instagram": "https://instagram.com/luminalens",
+      "whatsapp": "+94771234567"
+    }
+  },
+  "albums": [
+    {
+      "id": "alb_001",
+      "slug": "wedding-nimal-kavindi",
+      "title": "Nimal & Kavindi's Royal Wedding",
+      "category": "Weddings",
+      "eventDate": "2026-12-12",
+      "location": "Earl's Regency, Kandy",
+      "description": "An enchanting traditional celebration nestled among misty mountain slopes, featuring heartfelt ceremonies, Poruwa rituals, and golden sunset portraits.",
+      "coverImage": {
+        "fileId": "1A2B3C4D5E6F_SAMPLE_01",
+        "url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+      },
+      "photos": [
+        {
+          "id": "pho_001",
+          "fileId": "1A2B3C4D5E6F_SAMPLE_01",
+          "url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85",
+          "caption": "The Couple Portrait at Dusk"
+        },
+        {
+          "id": "pho_002",
+          "fileId": "1A2B3C4D5E6F_SAMPLE_02",
+          "url": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=85",
+          "caption": "Ceremony Details & Decor"
+        },
+        {
+          "id": "pho_003",
+          "fileId": "1A2B3C4D5E6F_SAMPLE_03",
+          "url": "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=85",
+          "caption": "First Dance under Fairylights"
+        },
+        {
+          "id": "pho_004",
+          "fileId": "1A2B3C4D5E6F_SAMPLE_04",
+          "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1600&q=85",
+          "caption": "Emotional Family Moments"
+        }
+      ],
+      "visibility": "published",
+      "allowDownload": true,
+      "createdAt": "2026-12-13T10:00:00Z",
+      "updatedAt": "2026-12-13T14:30:00Z"
+    },
+    {
+      "id": "alb_002",
+      "slug": "coastal-golden-hour",
+      "title": "Mirissa Coastal Solitude",
+      "category": "Portraits",
+      "eventDate": "2026-11-20",
+      "location": "Mirissa, Sri Lanka",
+      "description": "Editorial fine art portraiture capturing natural sea spray, dramatic tide lines, and warm amber illumination.",
+      "coverImage": {
+        "fileId": "2B3C4D5E6F7G_SAMPLE_01",
+        "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80"
+      },
+      "photos": [
+        {
+          "id": "pho_005",
+          "fileId": "2B3C4D5E6F7G_SAMPLE_01",
+          "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=85",
+          "caption": "Ocean Breeze Portrait"
+        },
+        {
+          "id": "pho_006",
+          "fileId": "2B3C4D5E6F7G_SAMPLE_02",
+          "url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=85",
+          "caption": "Golden Reflections"
+        }
+      ],
+      "visibility": "published",
+      "allowDownload": true,
+      "createdAt": "2026-11-21T09:00:00Z",
+      "updatedAt": "2026-11-21T09:00:00Z"
+    },
+    {
+      "id": "alb_003",
+      "slug": "yala-silent-giants",
+      "title": "The Silent Giants of Yala",
+      "category": "Wildlife",
+      "eventDate": "2026-10-15",
+      "location": "Yala National Park",
+      "description": "Documenting raw wildlife encounters, elephant herds at dawn, and elusive leopards across the southern sanctuaries.",
+      "coverImage": {
+        "fileId": "3C4D5E6F7G8H_SAMPLE_01",
+        "url": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1200&q=80"
+      },
+      "photos": [
+        {
+          "id": "pho_007",
+          "fileId": "3C4D5E6F7G8H_SAMPLE_01",
+          "url": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1600&q=85",
+          "caption": "Dawn at the Waterhole"
+        }
+      ],
+      "visibility": "published",
+      "allowDownload": false,
+      "createdAt": "2026-10-16T11:00:00Z",
+      "updatedAt": "2026-10-16T11:00:00Z"
+    }
+  ]
+}
