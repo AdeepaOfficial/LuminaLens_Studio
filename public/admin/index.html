@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuminaLens Studio Console — Photography Management Portal</title>
+  <meta name="description" content="Administrative management dashboard for LuminaLens Studio photography albums, client proofing, and Google Drive CDN delivery.">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>">
+</head>
+<body>
+
+  <!-- Admin Top Navigation Header -->
+  <header class="admin-header">
+    <a href="index.html" class="admin-brand">
+      <div class="admin-brand-icon">✦</div>
+      <div class="admin-brand-text">
+        <span class="admin-brand-title">LuminaLens</span>
+        <span class="admin-brand-subtitle">Studio Console</span>
+      </div>
+    </a>
+
+    <nav class="admin-nav">
+      <a href="index.html" class="admin-nav-link active">
+        <span>Dashboard</span>
+      </a>
+      <a href="#albumsSection" class="admin-nav-link">
+        <span>Albums Directory</span>
+      </a>
+      <a href="album-form.html" class="admin-nav-link">
+        <span>+ New Album</span>
+      </a>
+    </nav>
+
+    <div class="admin-header-actions">
+      <a href="../index.html" target="_blank" class="btn-public-site">
+        <span>View Public Site</span>
+        <span>↗</span>
+      </a>
+      <button type="button" id="logoutBtn" class="btn-logout" title="Sign out of console">
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="admin-container">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Studio Overview & Collections</h1>
+        <p class="page-subtitle">Curate editorial galleries, manage private client proofing links, and monitor cloud assets.</p>
+      </div>
+      <div>
+        <button type="button" id="btnOpenNewAlbumModal" class="btn btn-primary">
+          <span>+ Create New Album</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section: Dashboard Metrics Cards -->
+    <section class="metrics-grid" aria-label="Dashboard Overview Metrics">
+      <!-- Total Albums Metric -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Total Albums</span>
+          <div class="metric-icon-wrap">🗂️</div>
+        </div>
+        <div id="metricTotalAlbums" class="metric-value">--</div>
+        <div class="metric-meta">
+          <span id="metricPublishedCount">-- Published</span>
+          <span>•</span>
+          <span id="metricPrivateCount">-- Private</span>
+        </div>
+      </div>
+
+      <!-- Managed Photos Metric -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Managed Photos</span>
+          <div class="metric-icon-wrap">📷</div>
+        </div>
+        <div id="metricTotalPhotos" class="metric-value">--</div>
+        <div class="metric-meta">
+          <span>High-Resolution Frames</span>
+        </div>
+      </div>
+
+      <!-- Total Pageviews Metric -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Client Pageviews</span>
+          <div class="metric-icon-wrap">👁️</div>
+        </div>
+        <div id="metricTotalViews" class="metric-value">1,420</div>
+        <div class="metric-meta">
+          <span>Across all galleries</span>
+        </div>
+      </div>
+
+      <!-- Cloud Delivery Status Metric -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Google Drive CDN</span>
+          <div class="metric-icon-wrap">☁️</div>
+        </div>
+        <div class="metric-value" style="font-size: 1.8rem; color: var(--status-published); display: flex; align-items: center; gap: 0.6rem;">
+          <span class="metric-pulse"></span>
+          <span>Connected</span>
+        </div>
+        <div class="metric-meta">
+          <span>Direct LH3 Low-Latency Delivery</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Albums Directory & Table -->
+    <section id="albumsSection">
+      <!-- Action Bar & Filters Toolbar -->
+      <div class="toolbar-card">
+        <div class="toolbar-left">
+          <!-- Real-Time Search -->
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              id="albumSearchInput" 
+              placeholder="Search albums by title, slug, or venue..."
+              aria-label="Search albums"
+            >
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <select id="categoryFilter" class="filter-select" aria-label="Filter by category">
+              <option value="ALL">All Categories</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Pre-Shoot">Pre-Shoot</option>
+              <option value="Portrait">Portrait</option>
+              <option value="Landscape">Landscape</option>
+              <option value="Event">Event</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+
+            <!-- Visibility Filter -->
+            <select id="visibilityFilter" class="filter-select" aria-label="Filter by visibility">
+              <option value="ALL">All Visibility</option>
+              <option value="published">Published</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-right">
+          <span id="tableResultsCount" style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-muted);">
+            Showing -- collections
+          </span>
+          <a href="album-form.html" class="btn btn-secondary btn-sm">
+            <span>Editor Page ➔</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="table-responsive">
+        <table class="admin-table" id="albumsTable">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 70px;">Cover</th>
+              <th scope="col">Collection & Unique URL Slug</th>
+              <th scope="col">Category</th>
+              <th scope="col">Event Date</th>
+              <th scope="col">Photos</th>
+              <th scope="col">Visibility Status</th>
+              <th scope="col" style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="albumsTableBody">
+            <!-- Dynamically populated via admin.js -->
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="font-size: 1.5rem;">✦</div>
+                  <div>Loading collections from studio server...</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================================
+       Modal: Album Creator / Editor (Integrated SPA Modal)
+       ======================================================================= -->
+  <div id="albumModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalAlbumTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="modalAlbumTitle" class="modal-title">
+          <span class="modal-title-icon">✦</span>
+          <span id="modalHeaderHeading">Create New Album</span>
+        </h2>
+        <button type="button" id="btnCloseAlbumModal" class="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="modalAlbumForm" novalidate>
+          <input type="hidden" id="modalAlbumId" name="id" value="">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="modalTitle" class="form-label">
+                <span>Album Title <span class="req">*</span></span>
+              </label>
+              <input 
+                type="text" 
+                id="modalTitle" 
+                name="title" 
+                class="form-input" 
+                placeholder="e.g. Royal Botanical Wedding - Nimal & Kavindi" 
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="modalSlug" class="form-label">
+                <span>URL Slug <span class="req">*</span></span>
+                <span class="form-label-helper">Auto-slugified</span>
+              </label>
+              <input 
+                type="text" 
+                id="modalSlug" 
+                name="slug" 
+                class="form-input" 
+                placeholder="wedding-nimal-kavindi" 
+                style="font-family: var(--font-mono); font-size: 0.84rem;"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="modalCategory" class="form-label">
+                <span>Category <span class="req">*</span></span>
+              </label>
+              <select id="modalCategory" name="category" class="form-select" required>
+                <option value="Wedding">Wedding</option>
+                <option value="Pre-Shoot">Pre-Shoot</option>
+                <option value="Portrait">Portrait</option>
+                <option value="Landscape">Landscape</option>
+                <option value="Event">Event</option>
+                <option value="Commercial">Commercial</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="modalDate" class="form-label">
+                <span>Event Date <span class="req">*</span></span>
+              </label>
+              <input 
+                type="date" 
+                id="modalDate" 
+                name="eventDate" 
+                class="form-input" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modalLocation" class="form-label">
+              <span>Location / Venue</span>
+            </label>
+            <input 
+              type="text" 
+              id="modalLocation" 
+              name="location" 
+              class="form-input" 
+              placeholder="e.g. Royal Botanical Gardens, Peradeniya"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="modalDescription" class="form-label">
+              <span>Curator Narrative</span>
+            </label>
+            <textarea 
+              id="modalDescription" 
+              name="description" 
+              class="form-textarea" 
+              rows="3" 
+              placeholder="Short description of the photo collection..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="modalCoverUrl" class="form-label">
+              <span>Cover Image Link (Google Drive or URL) <span class="req">*</span></span>
+            </label>
+            <input 
+              type="text" 
+              id="modalCoverUrl" 
+              name="rawCoverUrl" 
+              class="form-input" 
+              placeholder="https://drive.google.com/file/d/1WD_NimalKavindi_Cover01/view?usp=sharing"
+              required
+            >
+            <!-- Cover preview inside modal -->
+            <div id="modalCoverPreview" class="cover-preview-card" style="display: none;">
+              <img id="modalCoverImg" src="" alt="Cover Preview" class="cover-preview-thumb">
+              <div class="cover-preview-details">
+                <div style="font-weight: 600; color: var(--text-primary);">Cover Preview Verified</div>
+                <div id="modalCoverDriveId" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">Drive ID: --</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toggles -->
+          <div class="form-grid">
+            <div class="toggle-field">
+              <div class="toggle-label-wrap">
+                <span class="toggle-title">Published (Public)</span>
+                <span class="toggle-desc">Show in public portfolio</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="modalPublished" name="published" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="toggle-field">
+              <div class="toggle-label-wrap">
+                <span class="toggle-title">Client Download</span>
+                <span class="toggle-desc">Allow hi-res photo downloads</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="modalAllowDownload" name="clientDownloadEnabled" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Bulk Photos Ingestion -->
+          <div class="form-group" style="margin-top: 1rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+              <label class="form-label" style="margin-bottom: 0;">
+                <span>Google Drive Photo Links (Bulk Ingestion)</span>
+              </label>
+              <button type="button" id="btnModalAddSamplePhotos" class="btn btn-outline btn-sm">
+                <span>+ Sample Links</span>
+              </button>
+            </div>
+            <textarea 
+              id="modalBulkPhotos" 
+              class="form-textarea code-textarea" 
+              rows="4" 
+              placeholder="Paste Google Drive shareable links line by line..."
+            ></textarea>
+          </div>
+
+          <!-- Real-time Photo Matrix inside Modal -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; margin-bottom: 0.4rem;">
+            <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
+              <span>Live Photo Matrix</span>
+              <span id="modalMatrixBadge" class="category-tag" style="font-family: var(--font-mono);">0 Photos</span>
+            </span>
+          </div>
+
+          <div id="modalPhotoMatrix" class="photo-preview-matrix">
+            <div class="matrix-empty">
+              No photos parsed. Paste Google Drive links above.
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="btnCancelModal" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnSaveModal" class="btn btn-primary">
+          <span id="modalSubmitText">Save Album ➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       Modal: Delete Confirmation
+       ======================================================================= -->
+  <div id="deleteModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <h2 id="deleteModalTitle" class="modal-title" style="color: var(--status-danger);">
+          <span>🗑️</span>
+          <span>Delete Collection</span>
+        </h2>
+        <button type="button" id="btnCloseDeleteModal" class="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+          Are you sure you want to delete <strong id="deleteAlbumTitleText" style="color: var(--text-primary);">this album</strong>?
+        </p>
+        <p style="font-size: 0.8rem; color: var(--text-muted); background: var(--bg-input); padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+          ⚠️ This will remove the album metadata and photo entries from the database. Google Drive raw files remain unaffected.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelDelete" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnConfirmDelete" class="btn btn-danger">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="../js/gdrive-helper.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof window.initAdminDashboard === 'function') {
+        window.initAdminDashboard();
+      }
+    });
+  </script>
+</body>
+</html>

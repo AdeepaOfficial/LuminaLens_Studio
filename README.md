@@ -97,7 +97,7 @@ The admin portal provides complete management over albums, photography showcases
 
 - **Admin URL:** `http://localhost:8080/admin`
 - **Default Username:** `admin`
-- **Default Password:** `lumina2026`
+- **Default Password:** `admin123`
 
 *(Credentials can be customized in `data/settings.json` or through the admin settings tab).*
 

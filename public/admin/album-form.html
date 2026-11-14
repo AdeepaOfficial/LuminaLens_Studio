@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuminaLens Studio Console — Album Editor</title>
+  <meta name="description" content="Create and curate high-resolution photography collections with Google Drive CDN integration.">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>">
+</head>
+<body>
+
+  <!-- Admin Top Navigation Header -->
+  <header class="admin-header">
+    <a href="index.html" class="admin-brand">
+      <div class="admin-brand-icon">✦</div>
+      <div class="admin-brand-text">
+        <span class="admin-brand-title">LuminaLens</span>
+        <span class="admin-brand-subtitle">Studio Console</span>
+      </div>
+    </a>
+
+    <nav class="admin-nav">
+      <a href="index.html" class="admin-nav-link">← Back to Overview</a>
+      <a href="index.html#albumsTableSection" class="admin-nav-link active">Album Collections</a>
+    </nav>
+
+    <div class="admin-header-actions">
+      <a href="../index.html" target="_blank" class="btn-public-site">
+        <span>View Public Site</span>
+        <span>↗</span>
+      </a>
+      <button type="button" id="logoutBtn" class="btn-logout" title="Sign out of console">
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="admin-container">
+    <div class="page-header">
+      <div>
+        <h1 id="formPageTitle" class="page-title">Create Photography Album</h1>
+        <p id="formPageSubtitle" class="page-subtitle">Configure collection metadata, visibility settings, and ingest Google Drive photographs.</p>
+      </div>
+      <div>
+        <a href="index.html" class="btn btn-secondary">
+          <span>Cancel & Return</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Album Editor Form Card -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+      <form id="albumForm" novalidate>
+        <input type="hidden" id="albumId" name="id" value="">
+
+        <!-- Section 1: Core Information -->
+        <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold-light); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>1.</span>
+          <span>Album Identity & Metadata</span>
+        </h2>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="albumTitle" class="form-label">
+              <span>Album Title <span class="req">*</span></span>
+              <span class="form-label-helper">Display name on gallery</span>
+            </label>
+            <input 
+              type="text" 
+              id="albumTitle" 
+              name="title" 
+              class="form-input" 
+              placeholder="e.g. Royal Botanical Wedding - Nimal & Kavindi" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="albumSlug" class="form-label">
+              <span>URL Slug <span class="req">*</span></span>
+              <span class="form-label-helper">Direct client link key</span>
+            </label>
+            <div style="position: relative;">
+              <input 
+                type="text" 
+                id="albumSlug" 
+                name="slug" 
+                class="form-input" 
+                placeholder="wedding-nimal-kavindi" 
+                style="font-family: var(--font-mono); font-size: 0.85rem;"
+                required
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="albumCategory" class="form-label">
+              <span>Event Category <span class="req">*</span></span>
+            </label>
+            <select id="albumCategory" name="category" class="form-select" required>
+              <option value="Wedding">Wedding & Celebrations</option>
+              <option value="Pre-Shoot">Pre-Wedding / Engagement</option>
+              <option value="Portrait">Portrait & Fashion Editorial</option>
+              <option value="Landscape">Landscape & Wildlife Expedition</option>
+              <option value="Event">Corporate / Private Event</option>
+              <option value="Commercial">Commercial & Studio</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="albumDate" class="form-label">
+              <span>Event Date <span class="req">*</span></span>
+            </label>
+            <input 
+              type="date" 
+              id="albumDate" 
+              name="eventDate" 
+              class="form-input" 
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="albumLocation" class="form-label">
+            <span>Location / Venue</span>
+            <span class="form-label-helper">Shown in album narrative</span>
+          </label>
+          <input 
+            type="text" 
+            id="albumLocation" 
+            name="location" 
+            class="form-input" 
+            placeholder="e.g. Royal Botanical Gardens, Peradeniya"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="albumDescription" class="form-label">
+            <span>Curator Narrative / Description</span>
+            <span class="form-label-helper">Editorial story of the session</span>
+          </label>
+          <textarea 
+            id="albumDescription" 
+            name="description" 
+            class="form-textarea" 
+            rows="3" 
+            placeholder="A romantic celebration captured amidst the misty hills of Kandy, featuring traditional Poruwa rituals..."
+          ></textarea>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 2rem 0;">
+
+        <!-- Section 2: Cover Image & Google Drive CDN -->
+        <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold-light); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>2.</span>
+          <span>Cover Photograph</span>
+        </h2>
+
+        <div class="form-group">
+          <label for="albumCoverUrl" class="form-label">
+            <span>Google Drive Cover Link or Direct URL <span class="req">*</span></span>
+            <span class="form-label-helper">Paste shareable drive URL or file ID</span>
+          </label>
+          <input 
+            type="text" 
+            id="albumCoverUrl" 
+            name="rawCoverUrl" 
+            class="form-input" 
+            placeholder="https://drive.google.com/file/d/1WD_NimalKavindi_Cover01/view?usp=sharing"
+            required
+          >
+          
+          <!-- Live Cover Preview Box -->
+          <div id="coverPreviewContainer" class="cover-preview-card" style="display: none;">
+            <img id="coverPreviewImg" src="" alt="Cover Preview" class="cover-preview-thumb">
+            <div class="cover-preview-details">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.2rem;">Cover Preview Verified</div>
+              <div id="coverDriveIdText" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">Drive ID: --</div>
+              <div class="cover-preview-status">✓ CDN Thumbnail Endpoint Ready</div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 2rem 0;">
+
+        <!-- Section 3: Visibility & Client Delivery Settings -->
+        <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold-light); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>3.</span>
+          <span>Client Delivery & Privacy Controls</span>
+        </h2>
+
+        <div class="form-grid">
+          <!-- Visibility Switch -->
+          <div class="toggle-field">
+            <div class="toggle-label-wrap">
+              <span class="toggle-title">Published to Public Portfolio</span>
+              <span class="toggle-desc">When disabled, album is Private and only accessible via direct unique slug link.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="albumPublished" name="published" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- Allow Downloads Switch -->
+          <div class="toggle-field">
+            <div class="toggle-label-wrap">
+              <span class="toggle-title">Allow Client High-Res Downloads</span>
+              <span class="toggle-desc">Enables the download button on lightbox and client gallery views.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="albumAllowDownload" name="clientDownloadEnabled" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 2rem 0;">
+
+        <!-- Section 4: Bulk Google Drive Photo Links -->
+        <div class="bulk-parser-header">
+          <div>
+            <h2 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--accent-gold-light); display: flex; align-items: center; gap: 0.5rem;">
+              <span>4.</span>
+              <span>Google Drive Photo Ingestion (Bulk Links)</span>
+            </h2>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem;">
+              Paste Google Drive shareable URLs line-by-line. The engine automatically converts them to CDN thumbnails and high-res lightbox links.
+            </p>
+          </div>
+          <div class="bulk-parser-actions">
+            <button type="button" id="btnLoadSamplePhotos" class="btn btn-outline btn-sm">
+              <span>+ Sample Links</span>
+            </button>
+            <button type="button" id="btnClearBulkPhotos" class="btn btn-outline btn-sm" style="color: var(--status-danger);">
+              <span>Clear</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <textarea 
+            id="bulkPhotosInput" 
+            class="form-textarea code-textarea" 
+            rows="6" 
+            placeholder="Paste Google Drive shareable links line by line, e.g.:
+https://drive.google.com/file/d/1WD_Photo_Poruwa01/view?usp=sharing
+https://drive.google.com/file/d/1WD_Photo_Rings02/view?usp=sharing
+https://drive.google.com/file/d/1WD_Photo_Candid03/view?usp=sharing"
+          ></textarea>
+        </div>
+
+        <!-- Real-Time Photo Matrix Preview Header -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
+            <span>Live Thumbnail Matrix Preview</span>
+            <span id="photoMatrixCountBadge" class="category-tag" style="font-family: var(--font-mono);">0 Photos</span>
+          </span>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Click ✕ on any thumbnail to exclude it</span>
+        </div>
+
+        <!-- Live Photo Thumbnail Matrix Grid -->
+        <div id="photoPreviewMatrix" class="photo-preview-matrix">
+          <div class="matrix-empty">
+            No photographs parsed yet. Paste Google Drive links above to see live preview thumbnails.
+          </div>
+        </div>
+
+        <!-- Form Submission Footer -->
+        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 1rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+          <a href="index.html" class="btn btn-secondary">Discard & Return</a>
+          <button type="submit" id="btnSubmitAlbum" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">
+            <span id="submitBtnText">Save & Publish Album ➔</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="../js/gdrive-helper.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize standalone album form editor
+      if (typeof window.initAlbumFormPage === 'function') {
+        window.initAlbumFormPage();
+      }
+    });
+  </script>
+</body>
+</html>

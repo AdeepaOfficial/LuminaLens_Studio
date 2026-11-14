@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuminaLens Studio Console — Studio Authentication</title>
+  <meta name="description" content="Secure administrative gateway for LuminaLens Studio photography portfolio and client albums.">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>">
+</head>
+<body class="login-body">
+
+  <div class="login-card">
+    <div class="login-brand-header">
+      <div class="login-logo-mark">✦</div>
+      <h1 class="login-title">LuminaLens</h1>
+      <p class="login-subtitle">Studio Console Authentication</p>
+    </div>
+
+    <!-- Alert Message Banner -->
+    <div id="loginAlert" class="login-alert" role="alert" aria-live="polite">
+      <span>⚠️</span>
+      <span id="loginAlertText">Authentication failed. Please check credentials.</span>
+    </div>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="form-group">
+        <label for="username" class="form-label">
+          <span>Studio ID / Username</span>
+        </label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          class="form-input" 
+          placeholder="admin" 
+          value="admin"
+          required 
+          autocomplete="username"
+          autofocus
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <span>Access Key / Password</span>
+        </label>
+        <div style="position: relative;">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-input" 
+            placeholder="••••••••••••" 
+            required 
+            autocomplete="current-password"
+            style="padding-right: 2.75rem;"
+          >
+          <button 
+            type="button" 
+            id="togglePassword" 
+            aria-label="Toggle password visibility"
+            style="position: absolute; right: 0.65rem; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0.35rem; font-size: 1rem;"
+          >
+            👁️
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin: 1.25rem 0 1.5rem;">
+        <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer; user-select: none;">
+          <input type="checkbox" id="rememberMe" name="rememberMe" style="accent-color: var(--accent-gold-primary); width: 16px; height: 16px;">
+          <span>Remember session</span>
+        </label>
+        <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted);">Default: lumina2026</span>
+      </div>
+
+      <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
+        <span id="btnText">Authenticate & Enter Console ➔</span>
+        <span id="btnSpinner" style="display: none;">Authenticating...</span>
+      </button>
+    </form>
+
+    <div class="login-footer-text">
+      <p><a href="../index.html">← Return to Public Portfolio</a></p>
+      <p style="margin-top: 0.65rem; font-size: 0.72rem; color: var(--text-muted);">LuminaLens Studio v1.0 • Protected Photography Console</p>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const loginForm = document.getElementById('loginForm');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const rememberCheckbox = document.getElementById('rememberMe');
+      const loginAlert = document.getElementById('loginAlert');
+      const loginAlertText = document.getElementById('loginAlertText');
+      const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const togglePassword = document.getElementById('togglePassword');
+
+      // Toggle password visibility
+      togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+      });
+
+      // Check existing authentication status
+      async function checkAuth() {
+        try {
+          const res = await fetch('/api/auth/status');
+          if (res.ok) {
+            const data = await res.json();
+            if (data.authenticated) {
+              window.location.href = '/admin';
+            }
+          }
+        } catch (e) {
+          // Server might not be responding or endpoint is unauthenticated
+        }
+      }
+      checkAuth();
+
+      function showAlert(msg) {
+        loginAlertText.textContent = msg;
+        loginAlert.classList.add('show');
+      }
+
+      function hideAlert() {
+        loginAlert.classList.remove('show');
+      }
+
+      loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideAlert();
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+        const remember = rememberCheckbox.checked;
+
+        if (!password) {
+          showAlert('Please enter your studio access password.');
+          return;
+        }
+
+        // Show loading state
+        loginSubmitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnSpinner.style.display = 'inline';
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: username,
+              password: password,
+              remember: remember
+            })
+          });
+
+          if (res.ok) {
+            const result = await res.json().catch(() => ({}));
+            if (result.token) {
+              localStorage.setItem('lumina_auth_token', result.token);
+              if (remember) {
+                localStorage.setItem('lumina_remember', 'true');
+              }
+            }
+            // Successful authentication, redirect to /admin
+            window.location.href = '/admin';
+          } else {
+            const errData = await res.json().catch(() => ({}));
+            showAlert(errData.error || errData.message || 'Invalid access credentials. Please verify your password.');
+          }
+        } catch (error) {
+          // If network error / standalone file test fallback
+          console.warn('API authentication fetch error:', error);
+          if (password === 'lumina2026') {
+            localStorage.setItem('lumina_auth_token', 'mock-session-token-' + Date.now());
+            window.location.href = './index.html';
+          } else {
+            showAlert('Connection to studio server failed or invalid access key. Use default key: lumina2026');
+          }
+        } finally {
+          loginSubmitBtn.disabled = false;
+          btnText.style.display = 'inline';
+          btnSpinner.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

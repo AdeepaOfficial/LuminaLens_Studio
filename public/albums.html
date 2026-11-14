@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography Collections &amp; Client Galleries | LuminaLens Studio</title>
+  <meta name="description" content="Browse all photography collections, wedding celebrations, coastal pre-shoots, and editorial portraits curated by LuminaLens Studio.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230b0c10'/><circle cx='50' cy='50' r='32' fill='none' stroke='%23f39c12' stroke-width='6'/><circle cx='50' cy='50' r='18' fill='none' stroke='%23f5af19' stroke-width='4'/><circle cx='50' cy='50' r='6' fill='%23f39c12'/></svg>">
+
+  <!-- Google Fonts Preconnect & Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header>
+    <nav class="navbar" id="navbar" aria-label="Main Navigation">
+      <div class="container nav-container">
+        <!-- Brand Crest -->
+        <a href="index.html" class="brand-crest" aria-label="LuminaLens Studio Home">
+          <span class="brand-crest-icon" aria-hidden="true">✦</span>
+          <div class="brand-title">
+            LuminaLens
+            <span>Studio</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-menu" id="nav-menu" role="menu">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+          <li role="none"><a href="albums.html" class="nav-link active" role="menuitem">Collections</a></li>
+          <li role="none"><a href="index.html#about" class="nav-link" role="menuitem">About Artist</a></li>
+          <li role="none"><a href="index.html#contact" class="nav-link" role="menuitem">Contact</a></li>
+        </ul>
+
+        <!-- Action Buttons -->
+        <div class="nav-actions">
+          <button type="button" class="btn btn-secondary btn-pill" id="client-access-btn" title="Access Private Client Album">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span>Client Access</span>
+          </button>
+
+          <!-- Mobile Toggle Button -->
+          <button type="button" class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section" style="padding-top: calc(var(--nav-height) + 60px);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Photography Directory</span>
+        <h1 class="section-title">All Curated Collections</h1>
+        <p class="section-subtitle">
+          Explore complete wedding celebrations, sunset coastal pre-shoots, fine art studio portraiture, and panoramic landscape journeys.
+        </p>
+      </div>
+
+      <!-- Real-Time Search Bar -->
+      <div class="catalog-search-wrapper">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" class="catalog-search-input" id="catalog-search" placeholder="Search by title, location (e.g. Kandy, Mirissa)..." aria-label="Search albums">
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-bar" role="tablist" aria-label="Filter albums by category">
+        <button type="button" class="filter-pill active" data-category="all" role="tab" aria-selected="true">All Works</button>
+        <button type="button" class="filter-pill" data-category="wedding" role="tab" aria-selected="false">Weddings</button>
+        <button type="button" class="filter-pill" data-category="preshoot" role="tab" aria-selected="false">Pre-Shoots</button>
+        <button type="button" class="filter-pill" data-category="portrait" role="tab" aria-selected="false">Portraits</button>
+        <button type="button" class="filter-pill" data-category="landscape" role="tab" aria-selected="false">Landscapes</button>
+      </div>
+
+      <!-- Albums Catalog Grid -->
+      <div class="albums-grid" id="albums-catalog-grid">
+        <!-- Dynamically rendered by app.js from data/albums.json -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Client Access Modal -->
+  <div class="modal-overlay" id="client-access-modal" role="dialog" aria-modal="true" aria-labelledby="client-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="client-modal-title">Client Album Access</h3>
+        <button type="button" class="modal-close-btn" id="close-client-modal" aria-label="Close dialog">&times;</button>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9375rem;">
+        Enter your unique album slug or private proofing code provided in your booking invitation:
+      </p>
+      <form id="client-access-form">
+        <div style="margin-bottom: 20px;">
+          <input type="text" class="share-url-input" id="client-album-code" placeholder="e.g. wedding-nimal-kavindi" required autocomplete="off" style="width: 100%;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <span>View Private Collection &rarr;</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h4>✦ LuminaLens Studio</h4>
+        <p>
+          Fine art wedding, portraiture, and landscape photography. High-speed client delivery powered by modern web standards and Google Drive cloud proofing.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <div class="footer-links-list">
+          <a href="index.html">Home</a>
+          <a href="albums.html">All Collections</a>
+          <a href="index.html#about">Artist Biography</a>
+          <a href="index.html#contact">Bookings &amp; Inquiries</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="footer-links-list">
+          <span style="color: var(--text-muted);">Colombo &amp; Kandy, Sri Lanka</span>
+          <a href="mailto:adeepadmarambage@gmail.com">adeepadmarambage@gmail.com</a>
+          <span style="color: var(--text-muted);">+94 77 123 4567</span>
+          <a href="admin/login.html" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-gold); margin-top: 8px;">Studio Console &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 LuminaLens Studio. All Rights Reserved.</div>
+      <div>Crafted for timeless visual storytelling.</div>
+    </div>
+  </footer>
+
+  <!-- Google Drive CDN Helper, Lightbox & Application Engine -->
+  <script src="js/gdrive-helper.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
