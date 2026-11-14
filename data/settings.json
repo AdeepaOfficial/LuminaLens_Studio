@@ -1,0 +1,23 @@
+{
+  "studioName": "LuminaLens Studio",
+  "principalArtist": "Adeepa Marambage",
+  "tagline": "Fine Art & Cinematic Photography",
+  "email": "adeepadmarambage@gmail.com",
+  "phone": "+94 77 123 4567",
+  "locations": [
+    "Colombo, Sri Lanka",
+    "Kandy, Sri Lanka",
+    "Worldwide Destination Commissions"
+  ],
+  "currency": "USD",
+  "googleDriveCdn": {
+    "enabled": true,
+    "lowLatencyHost": "lh3.googleusercontent.com",
+    "defaultThumbnailSize": 600,
+    "defaultHighResWidth": 1600
+  },
+  "clientProofing": {
+    "defaultDownloadAllowed": true,
+    "watermarkPreview": false
+  }
+}

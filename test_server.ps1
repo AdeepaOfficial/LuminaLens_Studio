@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 Write-Host "Starting LuminaServer in background..."
-$proc = Start-Process -FilePath "java" -ArgumentList "-cp bin server.LuminaServer 8080" -WorkingDirectory "C:\Users\Adeepa D. Marambage\OpenBot\Shared\LuminaLens_Studio" -PassThru -WindowStyle Hidden
+$proc = Start-Process -FilePath "java" -ArgumentList "-cp bin server.LuminaServer 8080" -WorkingDirectory $PSScriptRoot -PassThru -WindowStyle Hidden
 
 try {
     # Wait for server to listen
@@ -100,8 +100,13 @@ try {
     $albumsHtml = (Invoke-WebRequest -Uri "http://localhost:8080/albums" -UseBasicParsing).Content
     Write-Host "GET /albums returns $($albumsHtml.Length) chars"
 
+    $albumSlugParamHtml = (Invoke-WebRequest -Uri "http://localhost:8080/album?slug=wedding-nimal-kavindi" -UseBasicParsing).Content
+    Write-Host "GET /album?slug=wedding-nimal-kavindi returns $($albumSlugParamHtml.Length) chars"
+    if ($albumSlugParamHtml -notmatch "album-gallery-grid") { throw "GET /album?slug= should return album viewer HTML!" }
+
     $albumViewerHtml = (Invoke-WebRequest -Uri "http://localhost:8080/album/wedding-nimal-kavindi" -UseBasicParsing).Content
     Write-Host "GET /album/wedding-nimal-kavindi returns $($albumViewerHtml.Length) chars"
+    if ($albumViewerHtml -notmatch "album-gallery-grid") { throw "GET /album/{slug} should return album viewer HTML!" }
 
     $adminHtml = (Invoke-WebRequest -Uri "http://localhost:8080/admin" -UseBasicParsing).Content
     Write-Host "GET /admin returns $($adminHtml.Length) chars"
@@ -125,5 +130,7 @@ try {
     Write-Host "`nAll tests completed successfully!"
 } finally {
     Write-Host "Stopping background server process..."
-    Stop-Process -Id $proc.Id -Force
+    if ($proc -and -not $proc.HasExited) {
+        Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
+    }
 }

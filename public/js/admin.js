@@ -94,10 +94,20 @@
   // Authentication & Session Checking
   // ==========================================================================
 
+  function getAuthHeaders(extra = {}) {
+    const headers = { ...extra };
+    const token = localStorage.getItem('lumina_auth_token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+  }
+
   async function checkAuthStatus() {
     try {
       const res = await fetch('/api/auth/status', {
-        headers: { 'Accept': 'application/json' }
+        headers: getAuthHeaders({ 'Accept': 'application/json' }),
+        credentials: 'include'
       });
       if (res.ok) {
         const data = await res.json();
@@ -133,7 +143,11 @@
 
   async function logout() {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        credentials: 'include'
+      });
     } catch (e) {
       // ignore
     }
@@ -151,10 +165,16 @@
 
   async function fetchAlbumsApi() {
     try {
-      // Try /api/albums?all=true first
-      let res = await fetch('/api/albums?all=true');
+      // Try /api/albums?all=true first with auth headers
+      let res = await fetch('/api/albums?all=true', {
+        headers: getAuthHeaders({ 'Accept': 'application/json' }),
+        credentials: 'include'
+      });
       if (!res.ok) {
-        res = await fetch('/api/albums');
+        res = await fetch('/api/albums', {
+          headers: getAuthHeaders({ 'Accept': 'application/json' }),
+          credentials: 'include'
+        });
       }
       if (res.ok) {
         const data = await res.json();
@@ -180,17 +200,18 @@
   }
 
   async function createAlbumApi(albumData) {
-    // Try POST /api/admin/albums then POST /api/albums
     let res = await fetch('/api/admin/albums', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
+      credentials: 'include',
       body: JSON.stringify(albumData)
     }).catch(() => null);
 
     if (!res || !res.ok) {
       res = await fetch('/api/albums', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
+        credentials: 'include',
         body: JSON.stringify(albumData)
       });
     }
@@ -205,14 +226,16 @@
   async function updateAlbumApi(id, albumData) {
     let res = await fetch(`/api/admin/albums/${encodeURIComponent(id)}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
+      credentials: 'include',
       body: JSON.stringify(albumData)
     }).catch(() => null);
 
     if (!res || !res.ok) {
       res = await fetch(`/api/albums/${encodeURIComponent(id)}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
+        credentials: 'include',
         body: JSON.stringify(albumData)
       });
     }
@@ -226,12 +249,16 @@
 
   async function deleteAlbumApi(id) {
     let res = await fetch(`/api/admin/albums/${encodeURIComponent(id)}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: getAuthHeaders(),
+      credentials: 'include'
     }).catch(() => null);
 
     if (!res || !res.ok) {
       res = await fetch(`/api/albums/${encodeURIComponent(id)}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+        credentials: 'include'
       });
     }
 
@@ -572,7 +599,7 @@
                 type="button" 
                 class="btn-action action-delete" 
                 title="Delete album"
-                onclick="window.promptDeleteAlbum('${escapeHtml(album.id)}', '${escapeHtml(album.title.replace(/'/g, "\\'"))}')"
+                onclick="window.promptDeleteAlbum('${escapeHtml(album.id)}')"
               >
                 🗑️
               </button>
@@ -911,14 +938,17 @@
   // Delete Album Flow
   // ==========================================================================
 
-  function promptDeleteAlbum(id, title) {
+  function promptDeleteAlbum(id, fallbackTitle) {
     albumToDeleteId = id;
     const modal = document.getElementById('deleteModal');
     const titleText = document.getElementById('deleteAlbumTitleText');
     if (!modal) return;
 
+    const album = allAlbums.find(a => a.id === id);
+    const displayTitle = album ? album.title : (fallbackTitle || 'this collection');
+
     if (titleText) {
-      titleText.textContent = `"${title}"`;
+      titleText.textContent = `"${displayTitle}"`;
     }
 
     modal.classList.add('is-open');

@@ -416,6 +416,29 @@ async function initAlbumsDirectory() {
   let activeCategory = 'all';
   let searchQuery = '';
 
+  // Parse category or search filter from URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const catParam = urlParams.get('cat') || urlParams.get('category');
+  if (catParam) {
+    activeCategory = catParam.toLowerCase();
+    filterPills.forEach(pill => {
+      const pCat = (pill.getAttribute('data-category') || '').toLowerCase();
+      if (pCat === activeCategory) {
+        pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
+      } else {
+        pill.classList.remove('active');
+        pill.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+
+  const queryParam = urlParams.get('q') || urlParams.get('search');
+  if (queryParam && searchInput) {
+    searchQuery = queryParam.trim();
+    searchInput.value = searchQuery;
+  }
+
   function applyFilters() {
     if (!grid) return;
     const filtered = albums.filter(album => {
@@ -444,8 +467,12 @@ async function initAlbumsDirectory() {
   // Filter Pill clicks
   filterPills.forEach(pill => {
     pill.addEventListener('click', () => {
-      filterPills.forEach(p => p.classList.remove('active'));
+      filterPills.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
       pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
       activeCategory = pill.getAttribute('data-category') || 'all';
       applyFilters();
     });
@@ -475,10 +502,11 @@ function createAlbumCardHtml(album) {
   }
 
   const formattedDate = formatDate(album.eventDate);
+  const albumUrl = `album.html?slug=${encodeURIComponent(album.slug)}`;
 
   return `
     <article class="album-card">
-      <div class="album-cover-wrapper">
+      <a href="${escapeHtml(albumUrl)}" class="album-cover-wrapper" aria-label="View ${escapeHtml(album.title)}">
         <span class="album-category-badge">${escapeHtml(album.category)}</span>
         <span class="album-photo-count-pill">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -487,13 +515,13 @@ function createAlbumCardHtml(album) {
           <span>${photoCount} Frames</span>
         </span>
         <img src="${escapeHtml(coverUrl)}" alt="${escapeHtml(album.title)}" class="album-cover-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop'">
-      </div>
+      </a>
       <div class="album-card-body">
         <div class="album-date">${escapeHtml(formattedDate)} • ${escapeHtml(album.location || 'Location')}</div>
-        <h3 class="album-title">${escapeHtml(album.title)}</h3>
+        <h3 class="album-title"><a href="${escapeHtml(albumUrl)}" style="color: inherit; text-decoration: none;">${escapeHtml(album.title)}</a></h3>
         <p class="album-description">${escapeHtml(album.description)}</p>
         <div class="album-card-footer">
-          <a href="album.html?slug=${encodeURIComponent(album.slug)}" class="view-album-link">
+          <a href="${escapeHtml(albumUrl)}" class="view-album-link">
             <span>Explore Collection</span>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>

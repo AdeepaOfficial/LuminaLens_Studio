@@ -132,10 +132,12 @@ public class LuminaServer {
             return cwd.resolve("..").normalize();
         }
 
-        Path defaultShared = Paths.get("C:/Users/Adeepa D. Marambage/OpenBot/Shared/LuminaLens_Studio");
-        if (Files.exists(defaultShared)) {
-            return defaultShared.toAbsolutePath().normalize();
-        }
+        try {
+            Path classLoc = Paths.get(LuminaServer.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if (Files.isDirectory(classLoc) && Files.exists(classLoc.resolve("../data"))) {
+                return classLoc.resolve("..").toAbsolutePath().normalize();
+            }
+        } catch (Exception ignored) {}
 
         return cwd;
     }
@@ -861,13 +863,13 @@ public class LuminaServer {
             }
 
             // 2. /albums -> public/albums.html
-            if ("/albums".equals(path) || "/albums/".equals(path) || "/albums.html".equals(path) || "/album".equals(path) || "/album/".equals(path)) {
+            if ("/albums".equals(path) || "/albums/".equals(path) || "/albums.html".equals(path)) {
                 serveFileOrFallback(exchange, publicDir.resolve("albums.html"), "Albums Collection");
                 return;
             }
 
-            // 3. /album/{slug} -> public/album.html
-            if (path.startsWith("/album/")) {
+            // 3. /album, /album/{slug}, /album.html -> public/album.html
+            if ("/album".equals(path) || "/album/".equals(path) || "/album.html".equals(path) || path.startsWith("/album/")) {
                 // If relative sub-resource was requested under /album/ (e.g. /album/css/..., /album/js/...)
                 if (path.startsWith("/album/css/") || path.startsWith("/album/js/")) {
                     String sub = path.substring("/album/".length());

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "book-2026-001",
+    "clientName": "Nimal Perera & Kavindi Silva",
+    "email": "nimal.kavindi@example.com",
+    "phone": "+94 71 234 5678",
+    "sessionType": "Wedding",
+    "eventDate": "2026-05-18",
+    "venue": "Royal Botanical Gardens & Earl's Regency, Kandy",
+    "status": "Confirmed",
+    "notes": "Full day coverage, drone coverage, and high-resolution online proofing gallery.",
+    "createdAt": "2026-01-10T09:30:00Z"
+  },
+  {
+    "id": "book-2026-002",
+    "clientName": "Arjun Sharma & Maya Patel",
+    "email": "arjun.maya@example.com",
+    "phone": "+94 76 987 6543",
+    "sessionType": "Pre-Shoot",
+    "eventDate": "2026-04-12",
+    "venue": "Mirissa Coastline, Sri Lanka",
+    "status": "Completed",
+    "notes": "Sunset session at Coconut Tree Hill and Secret Beach.",
+    "createdAt": "2026-02-05T14:15:00Z"
+  }
+]
