@@ -1,122 +1,254 @@
-{
-  "system": {
-    "name": "LuminaLens Studio",
-    "photographer": "Adeepa Marambage",
-    "tagline": "Visual Stories Captured in Timeless Light",
-    "bio": "Specializing in high-end wedding, portrait, and editorial photography. Crafting visual legacies with atmospheric light and cinematic storytelling.",
-    "stats": [
-      { "label": "Weddings Captured", "value": "150+" },
-      { "label": "Years of Mastery", "value": "12+" },
-      { "label": "Frames Curated", "value": "45,000+" },
-      { "label": "Global Destinations", "value": "18" }
-    ],
-    "contact": {
-      "email": "adeepadmarambage@gmail.com",
-      "phone": "+94 77 123 4567",
-      "location": "Colombo, Sri Lanka",
-      "instagram": "https://instagram.com/luminalens",
-      "whatsapp": "+94771234567"
-    }
+[
+  {
+    "id": "alb-wedding-01",
+    "title": "Royal Botanical Wedding - Nimal & Kavindi",
+    "slug": "wedding-nimal-kavindi",
+    "category": "Wedding",
+    "eventDate": "2026-05-18",
+    "description": "An enchanting outdoor wedding ceremony held at the Royal Botanical Gardens, Peradeniya. Capturing candid emotional moments, traditional poruwa rituals, and twilight couple portraits surrounded by lush tropical greenery.",
+    "rawCoverUrl": "https://drive.google.com/file/d/1WD_NimalKavindi_Cover01/view?usp=sharing",
+    "coverImage": "https://lh3.googleusercontent.com/d/1WD_NimalKavindi_Cover01=w1600",
+    "coverThumbnail": "https://drive.google.com/thumbnail?id=1WD_NimalKavindi_Cover01&sz=w600",
+    "published": true,
+    "clientDownloadEnabled": true,
+    "createdAt": "2026-05-20T10:30:00Z",
+    "updatedAt": "2026-05-20T10:30:00Z",
+    "photos": [
+      {
+        "id": "photo-w1",
+        "driveId": "1WD_Photo_Poruwa01",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Poruwa01/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Poruwa01=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Poruwa01&sz=w600",
+        "caption": "Traditional Poruwa Ceremony & Auspicious Blessing"
+      },
+      {
+        "id": "photo-w2",
+        "driveId": "1WD_Photo_Rings02",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Rings02/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Rings02=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Rings02&sz=w600",
+        "caption": "Exchange of Handcrafted Wedding Rings"
+      },
+      {
+        "id": "photo-w3",
+        "driveId": "1WD_Photo_Candid03",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Candid03/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Candid03=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Candid03&sz=w600",
+        "caption": "Joyful Candid Laughter with Family & Friends"
+      },
+      {
+        "id": "photo-w4",
+        "driveId": "1WD_Photo_Avenue04",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Avenue04/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Avenue04=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Avenue04&sz=w600",
+        "caption": "Romantic Stroll along the Royal Palm Avenue"
+      },
+      {
+        "id": "photo-w5",
+        "driveId": "1WD_Photo_Toast05",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Toast05/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Toast05=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Toast05&sz=w600",
+        "caption": "Twilight Toast under Golden Fairy Lights"
+      },
+      {
+        "id": "photo-w6",
+        "driveId": "1WD_Photo_Dance06",
+        "rawUrl": "https://drive.google.com/file/d/1WD_Photo_Dance06/view",
+        "url": "https://lh3.googleusercontent.com/d/1WD_Photo_Dance06=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1WD_Photo_Dance06&sz=w600",
+        "caption": "First Dance in the Glasshouse Pavilion"
+      }
+    ]
   },
-  "albums": [
-    {
-      "id": "alb_001",
-      "slug": "wedding-nimal-kavindi",
-      "title": "Nimal & Kavindi's Royal Wedding",
-      "category": "Weddings",
-      "eventDate": "2026-12-12",
-      "location": "Earl's Regency, Kandy",
-      "description": "An enchanting traditional celebration nestled among misty mountain slopes, featuring heartfelt ceremonies, Poruwa rituals, and golden sunset portraits.",
-      "coverImage": {
-        "fileId": "1A2B3C4D5E6F_SAMPLE_01",
-        "url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+  {
+    "id": "alb-preshoot-02",
+    "title": "Golden Sunset Coastal Pre-Shoot - Arjun & Maya",
+    "slug": "coastal-preshoot-arjun-maya",
+    "category": "Pre-Shoot",
+    "eventDate": "2026-04-12",
+    "description": "A romantic golden-hour pre-wedding shoot along the southern coast of Mirissa. Warm coastal breezes, dramatic cliffside ocean vistas, and intimate sunset silhouettes.",
+    "rawCoverUrl": "https://drive.google.com/file/d/1PS_ArjunMaya_Cover02/view?usp=sharing",
+    "coverImage": "https://lh3.googleusercontent.com/d/1PS_ArjunMaya_Cover02=w1600",
+    "coverThumbnail": "https://drive.google.com/thumbnail?id=1PS_ArjunMaya_Cover02&sz=w600",
+    "published": true,
+    "clientDownloadEnabled": true,
+    "createdAt": "2026-04-15T14:20:00Z",
+    "updatedAt": "2026-04-15T14:20:00Z",
+    "photos": [
+      {
+        "id": "photo-p1",
+        "driveId": "1PS_Photo_Cliff01",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Cliff01/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Cliff01=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Cliff01&sz=w600",
+        "caption": "Sunset Whispers on Coconut Tree Hill"
       },
-      "photos": [
-        {
-          "id": "pho_001",
-          "fileId": "1A2B3C4D5E6F_SAMPLE_01",
-          "url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85",
-          "caption": "The Couple Portrait at Dusk"
-        },
-        {
-          "id": "pho_002",
-          "fileId": "1A2B3C4D5E6F_SAMPLE_02",
-          "url": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=85",
-          "caption": "Ceremony Details & Decor"
-        },
-        {
-          "id": "pho_003",
-          "fileId": "1A2B3C4D5E6F_SAMPLE_03",
-          "url": "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=85",
-          "caption": "First Dance under Fairylights"
-        },
-        {
-          "id": "pho_004",
-          "fileId": "1A2B3C4D5E6F_SAMPLE_04",
-          "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1600&q=85",
-          "caption": "Emotional Family Moments"
-        }
-      ],
-      "visibility": "published",
-      "allowDownload": true,
-      "createdAt": "2026-12-13T10:00:00Z",
-      "updatedAt": "2026-12-13T14:30:00Z"
-    },
-    {
-      "id": "alb_002",
-      "slug": "coastal-golden-hour",
-      "title": "Mirissa Coastal Solitude",
-      "category": "Portraits",
-      "eventDate": "2026-11-20",
-      "location": "Mirissa, Sri Lanka",
-      "description": "Editorial fine art portraiture capturing natural sea spray, dramatic tide lines, and warm amber illumination.",
-      "coverImage": {
-        "fileId": "2B3C4D5E6F7G_SAMPLE_01",
-        "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80"
+      {
+        "id": "photo-p2",
+        "driveId": "1PS_Photo_Waves02",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Waves02/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Waves02=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Waves02&sz=w600",
+        "caption": "Crashing Ocean Waves & Evening Silhouette"
       },
-      "photos": [
-        {
-          "id": "pho_005",
-          "fileId": "2B3C4D5E6F7G_SAMPLE_01",
-          "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=85",
-          "caption": "Ocean Breeze Portrait"
-        },
-        {
-          "id": "pho_006",
-          "fileId": "2B3C4D5E6F7G_SAMPLE_02",
-          "url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=85",
-          "caption": "Golden Reflections"
-        }
-      ],
-      "visibility": "published",
-      "allowDownload": true,
-      "createdAt": "2026-11-21T09:00:00Z",
-      "updatedAt": "2026-11-21T09:00:00Z"
-    },
-    {
-      "id": "alb_003",
-      "slug": "yala-silent-giants",
-      "title": "The Silent Giants of Yala",
-      "category": "Wildlife",
-      "eventDate": "2026-10-15",
-      "location": "Yala National Park",
-      "description": "Documenting raw wildlife encounters, elephant herds at dawn, and elusive leopards across the southern sanctuaries.",
-      "coverImage": {
-        "fileId": "3C4D5E6F7G8H_SAMPLE_01",
-        "url": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1200&q=80"
+      {
+        "id": "photo-p3",
+        "driveId": "1PS_Photo_Beach03",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Beach03/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Beach03=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Beach03&sz=w600",
+        "caption": "Barefoot Walk on Secret Beach"
       },
-      "photos": [
-        {
-          "id": "pho_007",
-          "fileId": "3C4D5E6F7G8H_SAMPLE_01",
-          "url": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1600&q=85",
-          "caption": "Dawn at the Waterhole"
-        }
-      ],
-      "visibility": "published",
-      "allowDownload": false,
-      "createdAt": "2026-10-16T11:00:00Z",
-      "updatedAt": "2026-10-16T11:00:00Z"
-    }
-  ]
-}
+      {
+        "id": "photo-p4",
+        "driveId": "1PS_Photo_Glow04",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Glow04/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Glow04=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Glow04&sz=w600",
+        "caption": "Golden Hour Warm Embrace"
+      },
+      {
+        "id": "photo-p5",
+        "driveId": "1PS_Photo_Splash05",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Splash05/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Splash05=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Splash05&sz=w600",
+        "caption": "Playful Moments in the Ocean Tide"
+      },
+      {
+        "id": "photo-p6",
+        "driveId": "1PS_Photo_Horizon06",
+        "rawUrl": "https://drive.google.com/file/d/1PS_Photo_Horizon06/view",
+        "url": "https://lh3.googleusercontent.com/d/1PS_Photo_Horizon06=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PS_Photo_Horizon06&sz=w600",
+        "caption": "Twilight Horizon Reflections"
+      }
+    ]
+  },
+  {
+    "id": "alb-portrait-03",
+    "title": "Studio Noir - Editorial & Fine Art Portraits",
+    "slug": "studio-noir-portraits",
+    "category": "Portraiture",
+    "eventDate": "2026-03-25",
+    "description": "A striking editorial portrait series exploring dramatic chiaroscuro lighting, deep shadows, and contemporary fashion aesthetics in a monochrome studio setting.",
+    "rawCoverUrl": "https://drive.google.com/file/d/1PT_StudioNoir_Cover03/view?usp=sharing",
+    "coverImage": "https://lh3.googleusercontent.com/d/1PT_StudioNoir_Cover03=w1600",
+    "coverThumbnail": "https://drive.google.com/thumbnail?id=1PT_StudioNoir_Cover03&sz=w600",
+    "published": true,
+    "clientDownloadEnabled": true,
+    "createdAt": "2026-03-28T09:15:00Z",
+    "updatedAt": "2026-03-28T09:15:00Z",
+    "photos": [
+      {
+        "id": "photo-pt1",
+        "driveId": "1PT_Photo_Chiaroscuro01",
+        "rawUrl": "https://drive.google.com/file/d/1PT_Photo_Chiaroscuro01/view",
+        "url": "https://lh3.googleusercontent.com/d/1PT_Photo_Chiaroscuro01=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PT_Photo_Chiaroscuro01&sz=w600",
+        "caption": "Dramatic Chiaroscuro Side Profile"
+      },
+      {
+        "id": "photo-pt2",
+        "driveId": "1PT_Photo_Monochrome02",
+        "rawUrl": "https://drive.google.com/file/d/1PT_Photo_Monochrome02/view",
+        "url": "https://lh3.googleusercontent.com/d/1PT_Photo_Monochrome02=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PT_Photo_Monochrome02&sz=w600",
+        "caption": "High-Contrast Monochrome Expression"
+      },
+      {
+        "id": "photo-pt3",
+        "driveId": "1PT_Photo_Editorial03",
+        "rawUrl": "https://drive.google.com/file/d/1PT_Photo_Editorial03/view",
+        "url": "https://lh3.googleusercontent.com/d/1PT_Photo_Editorial03=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PT_Photo_Editorial03&sz=w600",
+        "caption": "Minimalist Fashion Silhouette"
+      },
+      {
+        "id": "photo-pt4",
+        "driveId": "1PT_Photo_Velvet04",
+        "rawUrl": "https://drive.google.com/file/d/1PT_Photo_Velvet04/view",
+        "url": "https://lh3.googleusercontent.com/d/1PT_Photo_Velvet04=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PT_Photo_Velvet04&sz=w600",
+        "caption": "Texture & Gaze in Dark Studio Setting"
+      },
+      {
+        "id": "photo-pt5",
+        "driveId": "1PT_Photo_Shadow05",
+        "rawUrl": "https://drive.google.com/file/d/1PT_Photo_Shadow05/view",
+        "url": "https://lh3.googleusercontent.com/d/1PT_Photo_Shadow05=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1PT_Photo_Shadow05&sz=w600",
+        "caption": "Prismatic Shadow Play"
+      }
+    ]
+  },
+  {
+    "id": "alb-landscape-04",
+    "title": "Misty Highlands - Ceylon Mountain Expedition",
+    "slug": "misty-highlands-expedition",
+    "category": "Landscape",
+    "eventDate": "2026-02-10",
+    "description": "A visual journey across Sri Lanka's central highlands. Early morning mists over Adam's Peak, terraced emerald tea hills in Nuwara Eliya, and dramatic mountain ridges.",
+    "rawCoverUrl": "https://drive.google.com/file/d/1LS_MistyHighlands_Cover04/view?usp=sharing",
+    "coverImage": "https://lh3.googleusercontent.com/d/1LS_MistyHighlands_Cover04=w1600",
+    "coverThumbnail": "https://drive.google.com/thumbnail?id=1LS_MistyHighlands_Cover04&sz=w600",
+    "published": true,
+    "clientDownloadEnabled": true,
+    "createdAt": "2026-02-14T08:00:00Z",
+    "updatedAt": "2026-02-14T08:00:00Z",
+    "photos": [
+      {
+        "id": "photo-ls1",
+        "driveId": "1LS_Photo_Peak01",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Peak01/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Peak01=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Peak01&sz=w600",
+        "caption": "Dawn Mist Awakening Adam's Peak Sanctuary"
+      },
+      {
+        "id": "photo-ls2",
+        "driveId": "1LS_Photo_Terraces02",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Terraces02/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Terraces02=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Terraces02&sz=w600",
+        "caption": "Rolling Emerald Tea Estates of Nuwara Eliya"
+      },
+      {
+        "id": "photo-ls3",
+        "driveId": "1LS_Photo_Waterfall03",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Waterfall03/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Waterfall03=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Waterfall03&sz=w600",
+        "caption": "Cascading Waters of Laxapana Gorge"
+      },
+      {
+        "id": "photo-ls4",
+        "driveId": "1LS_Photo_Bridge04",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Bridge04/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Bridge04=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Bridge04&sz=w600",
+        "caption": "Nine Arch Bridge Emerging from Morning Fog"
+      },
+      {
+        "id": "photo-ls5",
+        "driveId": "1LS_Photo_Plains05",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Plains05/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Plains05=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Plains05&sz=w600",
+        "caption": "Windblown Cloud Formations over Horton Plains"
+      },
+      {
+        "id": "photo-ls6",
+        "driveId": "1LS_Photo_Knuckles06",
+        "rawUrl": "https://drive.google.com/file/d/1LS_Photo_Knuckles06/view",
+        "url": "https://lh3.googleusercontent.com/d/1LS_Photo_Knuckles06=w1600",
+        "thumbnailUrl": "https://drive.google.com/thumbnail?id=1LS_Photo_Knuckles06&sz=w600",
+        "caption": "Twilight Over the Knuckles Conservation Range"
+      }
+    ]
+  }
+]
